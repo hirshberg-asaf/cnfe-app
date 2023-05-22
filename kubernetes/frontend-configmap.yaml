@@ -1,0 +1,7 @@
+apiVersion: v1
+data:
+  url: http://backend.cnfe-app.svc.cluster.local/posts
+kind: ConfigMap
+metadata:
+  name: backend-url
+  namespace: cnfe-app

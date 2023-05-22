@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: cnfe-app
+  labels:
+    app: frontent
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+      version: v1
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: frontend
+        version: v1
+    spec:
+      containers:
+      - image: docker.io/cics89/frontend:1.10052020
+        name: frontend
+        env:
+        - name: BACKENDURL
+          valueFrom:
+            configMapKeyRef:
+              name: backend-url
+              key: url
+        ports:
+        - containerPort: 80
+          name: index
+        - containerPort: 9000
+          name: metrics
+        livenessProbe:
+          httpGet:
+            path: /_healthz
+            port: 80
+            httpHeaders:
+            - name: Custom-Header
+              value: OK
+        readinessProbe:
+          httpGet:
+            path: /_healthz
+            port: 80
+            httpHeaders:
+            - name: Custom-Header
+              value: OK
+        resources: {}
+status: {}

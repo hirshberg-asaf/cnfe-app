@@ -1,0 +1,32 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: cnfe-gateway
+  namespace: cnfe-app
+spec:
+  selector:
+    istio: ingressgateway # use istio default controller
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "cnfe.kubehirsh.com"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: cnfe
+  namespace: cnfe-app
+spec:
+  hosts:
+  - "cnfe.kubehirsh.com"
+  gateways:
+  - cnfe-gateway
+  http:
+  - route:
+    - destination:
+        host: frontend.cnfe-app.svc.cluster.local
+        port:
+          number: 80

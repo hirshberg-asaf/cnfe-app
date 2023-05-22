@@ -1,0 +1,87 @@
+{
+    "posts": {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              -0.089607,
+              51.499553
+            ]
+          },
+          "properties": {
+            "title": "London",
+            "description": "The capital of the United Kingdom"
+          }
+        },
+        {
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              2.35,
+              48.85
+            ]
+          },
+          "properties": {
+            "title": "Paris",
+            "description": "The capital of France"
+          }
+        },
+        {
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              12.4964,
+              41.9028
+            ]
+          },
+          "properties": {
+            "title": "Rome",
+            "description": "The capital of Italy"
+          }
+        },
+        {
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              13.4,
+              52.52
+            ]
+          },
+          "properties": {
+            "title": "Berlin",
+            "description": "The capital of Germany"
+          }
+        },
+        {
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              -3.7,
+              40.41
+            ]
+          },
+          "properties": {
+            "title": "madrid",
+            "description": "The capital of Spain"
+          }
+        }
+      ]
+    },
+    "comments": [
+      {
+        "id": 1,
+        "body": "test",
+        "postId": 1
+      }
+    ],
+    "profile": {
+      "name": "test"
+    }
+  }

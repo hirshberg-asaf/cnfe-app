@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset='utf-8' />
+   <title> CNFE Carbon footprint</title>
+   <link rel="shortcut icon" href="logo.png" />
+   <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+   <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js'></script>
+   <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css' rel='stylesheet' />
+   <style>
+      body {
+         margin: 0;
+         padding: 0;
+      }
+
+      #map {
+         position: absolute;
+         top: 0;
+         bottom: 0;
+         width: 100%;
+      }
+
+      .marker {
+         background-image: url('logo.png');
+         background-size: cover;
+         width: 30px;
+         height: 30px;
+         border-radius: 30%;
+         cursor: pointer;
+      }
+
+      .mapboxgl-popup {
+         max-width: 200px;
+      }
+
+      .mapboxgl-popup-content {
+         text-align: center;
+         font-family: 'Open Sans', sans-serif;
+      }
+   </style>
+</head>
+
+<body>
+   <div id='map'></div>
+   <script src="js/jquery-3.4.1.js" type="text/javascript"></script>
+   <script>
+
+      mapboxgl.accessToken = 'pk.eyJ1IjoiYWhpcnNoYmVyZyIsImEiOiJjazhpbmg5OTQwMWNsM2dvMjBsamdwdzNiIn0.W8xQXT_BgwpWm_SZ2kxwvA';
+      var map = new mapboxgl.Map({
+         container: 'map',
+         style: 'mapbox://styles/mapbox/streets-v11',
+         center: [12.4964, 41.9028],
+         zoom: 3
+      });
+      $.getJSON("/data").done(function (geojson) {
+         // add markers to map
+         geojson.features.forEach(function (marker) {
+
+            // create a HTML element for each feature
+            var el = document.createElement('div');
+            el.className = 'marker';
+
+            // make a marker for each feature and add to the map
+            new mapboxgl.Marker(el)
+               .setLngLat(marker.geometry.coordinates)
+               .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+                  .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>'))
+               .addTo(map);
+         });
+      }).fail(function (jqxhr, textStatus, error) {
+         var err = textStatus + ", " + error;
+         console.error("Error getting", err);
+      });
+   </script>
+</body>
+
+</html>

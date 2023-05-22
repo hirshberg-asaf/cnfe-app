@@ -1,0 +1,13 @@
+kind: ServiceMonitor
+apiVersion: monitoring.coreos.com/v1
+metadata:
+  name: app-sm
+  namespace: cnfe-app
+  labels:
+    app: frontend
+spec:
+  selector:
+    matchLabels:
+      app: frontend  
+  endpoints:
+  - port: metrics         
