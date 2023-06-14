@@ -1,4 +1,4 @@
-FROM node:20.2-bullseye-slim
+FROM node:bullseye-slim
 MAINTAINER Christian Lück <christian@lueck.tv>
 
 RUN npm install -g json-server
